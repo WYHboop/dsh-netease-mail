@@ -12,20 +12,22 @@ IMAP4rev1 与 SMTP 都直接跑在 Node 的 `node:tls` 上，**零第三方依�
 
 ## 安装
 
-```powershell
-# 1) 拿到这份代码（clone 到本机任意目录）
-git clone <仓库地址> dsh-netease-mail
+不需要 GitHub、不需要 npm 账号。两种拿法任选：
 
-# 2) 装进某个 profile（桌面版用 desktop）
+```powershell
+# A. 一个 .tgz 文件（推荐给同事：装进 profile 后是独立副本，源码目录挪走也不影响）
+dsh plugin --profile desktop add C:\path\to\dsh-netease-mail-0.1.0.tgz
+
+# B. 源码文件夹（开发时用；link: 会一直指着这个目录）
 dsh plugin --profile desktop add link:C:/path/to/dsh-netease-mail
 ```
 
 装完在 DSH 的插件管理器里确认 `dsh-netease-mail` 已启用；桌面版唤醒一次即可
 （工具与面板两部分都是「装进 profile 就生效」，不需要重启宿主）。
+自己出 tgz 就是一条 `npm pack`——发布包 18 个文件 / 62 kB。
 
-**第一次用之前必须做的一件事**：把 `local-settings.example.json` 复制成同目录的
-`local-settings.json`，填上邮箱账号与授权码来源（见下「配置」）。不填的话所有工具都会
-明确告诉你「还没配邮箱账号」。
+**第一次用之前必须做的一件事**：配好邮箱账号与授权码来源（见下「配置」）。不配的话所有工具都会
+明确告诉你「还没配邮箱账号」，不会静默失败。
 
 ## 面板（侧栏「邮箱」）
 
@@ -89,13 +91,20 @@ node _probe_api.mjs 53226    # 指定端口
 
 ## 配置
 
-配置有两层，优先级从低到高：
+私有配置有几个落点，越靠后越优先；这样「源码开发」和「装成包」都各有合适的位置：
 
-1. **`local-settings.json`**（本机私有，已被 `.gitignore` 忽略，不会进仓库）
-   —— 你的账号、授权码文件路径、下载目录都写在这里。
-   照 `local-settings.example.json` 复制一份改名即可。
-2. **`cordis.patch.yml` 的 `config`**（随包发布的公开默认值）
-   —— 只放服务器名、端口、页大小这类不含个人信息的参数；写了同名字段会盖掉上一层。
+| 落点 | 场景 |
+|---|---|
+| 包根目录 `local-settings.json` | 源码开发时（照 `local-settings.example.json` 复制；已 gitignore） |
+| 用户目录 `~/.dsh/dsh-netease-mail.json` | **装成 tgz 的人用这个**——不在 `node_modules` 里，重装不会盖掉 |
+| 环境变量 `DSH_NETEASE_MAIL_SETTINGS` 指向的 JSON 文件 | 想放任意位置、或多套配置切换 |
+| `cordis.patch.yml` 的 `config` | 随包发布的公开默认值（服务器名、端口、页大小），**永远最后生效** |
+
+前三个文件里写的东西一样，两行就够：
+
+```json
+{ "account": "you@yourcompany.com", "authCodeFile": "D:\\secret\\authcode.txt" }
+```
 
 **授权码不进任何配置文件**（也请不要提交它），按顺序从三处找：
 

@@ -5,10 +5,11 @@ local-settings.json
 client-errors.log
 *.log
 
-# 探针脚本与本地缓存（开发时用，发布包不需要）
+# 探针脚本与本地缓存、打好的分发包（开发时用，不进仓）
 _probe*.mjs
 _selftest*.mjs
 _market.json
+*.tgz
 
 # 含真实业务邮件的截图不随仓库发布
 docs/panel.png

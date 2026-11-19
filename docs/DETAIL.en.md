@@ -37,13 +37,17 @@ Then copy `local-settings.example.json` to `local-settings.json` in the package 
 
 ## Configuration
 
-Two layers, later wins:
+Private settings can live in three places (later wins):
+`local-settings.json` in the package root (source checkout), `~/.dsh/dsh-netease-mail.json`
+(best for a `dsh plugin add` install — it sits outside `node_modules`), or the file named by
+`DSH_NETEASE_MAIL_SETTINGS`. On top of those sits `config` in `cordis.patch.yml` (published
+defaults: hostnames, ports, page size), which always wins.
 
-1. `local-settings.json` in the package root (git-ignored — this is where your account and
-   auth-code file path belong; copy `local-settings.example.json` to start).
-2. `config` in `cordis.patch.yml` (the published defaults: hostnames, ports, page size).
+```json
+{ "account": "you@yourcompany.com", "authCodeFile": "D:\\secret\\authcode.txt" }
+```
 
-The **auth code never goes into either file**; it is resolved in this order:
+The **auth code never goes into any of those files**; it is resolved in this order:
 
 1. `config.authCode` (debugging only)
 2. env var `NETEASE_AUTH_CODE` (renameable via `authCodeEnv`)

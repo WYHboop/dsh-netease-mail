@@ -19,22 +19,37 @@
 
 ## 安装
 
+两种拿法，任选其一（都不需要 GitHub、不需要 npm 账号）：
+
 ```powershell
-git clone <仓库地址> dsh-netease-mail
+# A. 拿到的是 .tgz（推荐给同事：一个文件，装完就是独立副本，源码目录挪走也不影响）
+dsh plugin --profile desktop add C:\path\to\dsh-netease-mail-0.1.0.tgz
+
+# B. 拿到的是源码文件夹（自己开发时用）
 dsh plugin --profile desktop add link:C:/path/to/dsh-netease-mail
 ```
 
 装完在 DSH 的插件管理器里确认 `dsh-netease-mail` 已启用。
+想自己出这个 tgz：在源码目录执行 `npm pack`。
 
 ## 配置（第一次用之前必须做）
 
-1. 把 `local-settings.example.json` 复制成同目录的 `local-settings.json`；
-2. 填 `account`（你的企业邮箱地址）与 `authCodeFile`（存授权码的文本文件路径），
-   或者改用环境变量 `NETEASE_AUTH_CODE`。
+三处任选其一，都能被读到（后者盖前者）：
 
-`local-settings.json` 已被 `.gitignore` 忽略，**不会进仓库**；随包发布的
-`cordis.patch.yml` 里只有服务器名与端口这类公开参数，不含任何个人账号。
-授权码本身既不进配置文件、也不会被回显——`mail_check` 只告诉你它来自哪一处。
+| 放哪儿 | 适合谁 |
+|---|---|
+| 环境变量 `DSH_NETEASE_MAIL_SETTINGS` 指向的 JSON 文件 | 想把它放在任意位置 / 多份配置切换 |
+| 用户目录 `~/.dsh/dsh-netease-mail.json` | **装成 tgz 的人最方便**（改这里不会被重装覆盖） |
+| 插件目录里的 `local-settings.json` | 源码开发时（照 `local-settings.example.json` 复制） |
+
+内容就两行：
+
+```json
+{ "account": "you@yourcompany.com", "authCodeFile": "D:\\secret\\authcode.txt" }
+```
+
+授权码也可以不给文件，改成设环境变量 `NETEASE_AUTH_CODE`。
+**授权码本身既不进 `cordis.patch.yml`、也不会被回显**——`mail_check` 只告诉你它来自哪一处。
 
 ## 工具
 
