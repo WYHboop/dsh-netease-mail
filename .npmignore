@@ -1,0 +1,10 @@
+# npm 打包时额外排除的东西（files 白名单会盖过 .gitignore，这里再兜一层）
+_probe*.mjs
+_selftest*.mjs
+_market.json
+local-settings.json
+client-errors.log
+*.log
+docs/panel.png
+.gitignore
+.npmignore

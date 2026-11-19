@@ -1,0 +1,51 @@
+{
+  "name": "dsh-netease-mail",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "NetEase enterprise mail (qiye.163.com) for DeepSeek Harness: zero-dependency IMAP/SMTP, eight mail tools, and a three-pane sidebar inbox. 网易企业邮箱连接器：自写 IMAP/SMTP，零依赖，八个邮件工具 + 三栏侧栏面板。",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "netease",
+    "qiye-163",
+    "imap",
+    "smtp",
+    "email",
+    "mail"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "lib",
+    "locale",
+    "docs",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "local-settings.example.json"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "license": "MIT"
+}

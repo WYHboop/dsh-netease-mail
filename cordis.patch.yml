@@ -1,0 +1,18 @@
+- insert:
+    - id: netease-mail
+      name: dsh-netease-mail
+      config:
+        # 公开默认配置：只放服务器与行为参数，不放任何个人账号。
+        # 邮箱地址与授权码来源请写在本包根目录的 local-settings.json（不进仓库），
+        # 或用环境变量 NETEASE_AUTH_CODE。字段说明见 docs/DETAIL.md。
+        imapHost: imap.qiye.163.com
+        imapPort: 993
+        smtpHost: smtp.qiye.163.com
+        smtpPort: 465
+        authCodeEnv: NETEASE_AUTH_CODE
+        defaultMailbox: INBOX
+        pageSize: 15
+        maxPageSize: 60
+        bodyChars: 6000
+        scanLimit: 300
+        timeoutMs: 30000

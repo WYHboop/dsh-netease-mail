@@ -1,0 +1,13 @@
+{
+  "_说明": "把这份文件复制成同目录下的 local-settings.json 再改。local-settings.json 已被 .gitignore 忽略，不会进仓库。这里的值优先级低于插件 config（cordis.patch.yml）。",
+  "account": "you@yourcompany.com",
+  "displayName": "你的名字",
+  "imapHost": "imap.qiye.163.com",
+  "imapPort": 993,
+  "smtpHost": "smtp.qiye.163.com",
+  "smtpPort": 465,
+  "authCodeEnv": "NETEASE_AUTH_CODE",
+  "authCodeFile": "",
+  "defaultMailbox": "INBOX",
+  "downloadDir": ""
+}
