@@ -47,5 +47,14 @@
       ]
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WYHboop/dsh-netease-mail.git"
+  },
+  "homepage": "https://github.com/WYHboop/dsh-netease-mail#readme",
+  "bugs": {
+    "url": "https://github.com/WYHboop/dsh-netease-mail/issues"
+  },
+  "author": "Wuyuehan",
   "license": "MIT"
 }
