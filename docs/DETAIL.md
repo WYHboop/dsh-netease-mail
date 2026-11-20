@@ -61,7 +61,7 @@ dsh plugin --profile desktop add link:C:/path/to/dsh-netease-mail
 | 通道 | 谁在用 | 依赖 | 合适场景 |
 |---|---|---|---|
 | **工具**（`mail_*`，八个） | 人家在对话里 | 只要插件加载，**不需要 GUI 窗口开着** | 读信、搜索、发信、存附件、改标记——日常主力 |
-| **面板路由**（`/mail/api2/*`，九条） | 面板界面 / 任意脚本 | 需要宿主在跑（端口随宿主；桌面版这次是 53226） | 面板交互；脚本批量操作；出证据 |
+| **面板路由**（`/mail/api2/*`，九条） | 面板界面 / 任意脚本 | 需要宿主在跑（端口随宿主，每次启动可能不同——以 Web GUI 地址为准；桌面版这次是 58480） | 面板交互；脚本批量操作；出证据 |
 
 `_probe_api.mjs` 就是"免点击自检"：它自己找宿主端口，把九条路由**逐条打一遍**
 （列信 / 读正文 / 搜索 / 已读↔未读往返 / 星标往返 / 存附件到临时目录 / 发信 `dryRun` / 上报通道），
@@ -88,6 +88,25 @@ node _probe_api.mjs 53226    # 指定端口
 | `mail_send` | 发信（纯文本或 HTML、抄送密送、本机文件作附件、`dryRun` 演练） | ★ 对外动作，先问伙伴 |
 | `mail_attachment` | 把附件存到本机（默认 `~/Downloads/mail-attachments`） | 只写本机文件 |
 | `mail_flag` | 已读/未读、星标、移动、删除 | ★ 移动与删除先问伙伴 |
+
+## 随包技能（`skills/netease-mail/SKILL.md`）
+
+工具解决「能做什么」，技能解决「怎么做才对」。二者不是一回事：
+
+| | 插件（plugin） | 技能（skill） |
+|---|---|---|
+| 是什么 | 往宿主里注册工具与路由的代码 | 一份给模型看的操作口径（`SKILL.md`） |
+| 提供了什么 | 八个 `mail_*` 能力 + 面板 | 什么时候用哪个工具、哪些动作先问、哪些坑别踩 |
+| 怎么来 | `cordis.patch.yml` 插入行 → `apply()` | `apply()` 里 `ctx.inject(["skills"])` → `skills.registerProvider()` |
+
+注册方式照官方随包技能的写法（参考 `dsh-univer-office` 的 `src/host/skills/plugin.ts`）：
+候选对象 `{ name, description, invocation: { modelInvocable: true, userInvocable: true }, provider, source: "bundled", resourceBase: { kind: "directory", path }, rank, locator: <SKILL.md 的 URL> }`；
+`rank` 取 **600** —— 等于 `@deepseek-ai/dsh-skill` 导出的 `BUNDLED_SKILL_RANK`（源码 `index.d.ts:16`），
+这样随包技能在排序上和官方内置技能同档，不会被挤到奇怪的位置。
+
+验证（实测）：重载插件后会话的技能目录里直接出现 `netease-mail`（`plugin_manager set_plugin include:netease-mail enabled=false→true` 即刷新）；
+`skill(netease-mail)` 返回的正文已去掉 frontmatter，并给出基目录
+`C:\...\dsh-netease-mail\skills\netease-mail\`。**加技能不需要重装、不需要重启宿主。**
 
 ## 配置
 

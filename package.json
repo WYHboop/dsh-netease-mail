@@ -1,6 +1,6 @@
 {
   "name": "dsh-netease-mail",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "NetEase enterprise mail (qiye.163.com) for DeepSeek Harness: zero-dependency IMAP/SMTP, eight mail tools, and a three-pane sidebar inbox. 网易企业邮箱连接器：自写 IMAP/SMTP，零依赖，八个邮件工具 + 三栏侧栏面板。",
   "keywords": [
@@ -26,6 +26,7 @@
   "files": [
     "lib",
     "locale",
+    "skills",
     "docs",
     "icon.svg",
     "cordis.patch.yml",
