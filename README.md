@@ -1,5 +1,7 @@
 # dsh-netease-mail
 
+**仓库：<https://github.com/WYHboop/dsh-netease-mail>** ｜ MIT
+
 网易企业邮箱（`qiye.163.com`）的 DSH 插件。自写 IMAP/SMTP，**零第三方依赖**
 （只用到 Node 的 `node:tls` / `node:net` / `node:crypto`），要求 Node ≥ 20。
 
@@ -19,7 +21,7 @@
 
 ## 安装
 
-两种拿法，任选其一（都不需要 GitHub、不需要 npm 账号）：
+三种拿法，任选其一（A/B 不需要 GitHub、不需要 npm 账号；C 只要公开仓库的读权限）：
 
 ```powershell
 # A. 拿到的是 .tgz（推荐给同事：一个文件，装完就是独立副本，源码目录挪走也不影响）
@@ -27,6 +29,10 @@ dsh plugin --profile desktop add C:\path\to\dsh-netease-mail-0.1.0.tgz
 
 # B. 拿到的是源码文件夹（自己开发时用）
 dsh plugin --profile desktop add link:C:/path/to/dsh-netease-mail
+
+# C. 从 GitHub 拿（公开仓库）
+git clone https://github.com/WYHboop/dsh-netease-mail.git
+dsh plugin --profile desktop add link:.\dsh-netease-mail
 ```
 
 装完在 DSH 的插件管理器里确认 `dsh-netease-mail` 已启用。
