@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "网易企业邮箱",
+    "title": "DSH-EMAIL · 网易企业邮",
     "description": "把网易企业邮（qiye.163.com）接进对话：列文件夹、看信、读信、搜信、发信、存附件、改标记。自写 IMAP/SMTP，零第三方依赖，授权码只从本机环境变量或文件读。",
     "detail": "docs/DETAIL.md"
   }

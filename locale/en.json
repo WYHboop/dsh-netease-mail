@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "NetEase Enterprise Mail",
+    "title": "DSH-EMAIL · NetEase Enterprise Mail",
     "description": "NetEase enterprise mailbox (qiye.163.com) inside the conversation: folders, list, read, search, send, save attachments, flags. Hand-written IMAP/SMTP, no dependencies; the auth code is read from a local env var or file only.",
     "detail": "docs/DETAIL.en.md"
   }

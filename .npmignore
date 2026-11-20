@@ -6,5 +6,6 @@ local-settings.json
 client-errors.log
 *.log
 docs/panel.png
+assets
 .gitignore
 .npmignore
